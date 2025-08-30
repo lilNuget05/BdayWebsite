@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Invite!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="invitation">
+        <div class="envelope">
+            <div class="flap"></div>
+            <div class="mask">
+                <div class="card">
+                    <img src="./Images/ploting_emoji.png" alt="kapec neradas?">
+                    <h1>Esi ielūgts!</h1>
+                    <p>Viljams un Samanta tevi ielūdz uz apvienoto Jubileju 🎉 <br> (mums paliek 20 gadi)</p>
+                    <a href="#" class="info-button">Vairāk informācijas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main id="info-section" style="display:none;">
+        <h1>Informācija par pasākumu</h1>
+        <p>Tie kas nezin, viljams un samanta diezgan bieži svin dzimšanas dienas kopā, tāpat kā jau iepriekš un šis gads nav nekāds izņēmums (šī būs trešā reize 😅).</p>
+        <div class="split">
+            <div style="text-align: center;">
+                <h3>Viljams</h3>
+                <img src="./Images/viljams.png" alt="Viljams">
+            </div>
+            <div style="text-align: center;">
+                <h3>Samanta</h3>
+                <img src="./Images/samanta.png" alt="Samanta">
+            </div>
+        </div>
+        <h2>Pamata informācija</h2>
+        <div class="split">
+            <div>
+                <p>Pasākums notiks 25. oktobrī plkst. 18:00. (Tā ir sestiena)</p>
+                <p>Vieta: Liepāja, Hotel Kolumbs pagrabtelpas.</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1306.028603801253!2d21.006009339079736!3d56.501492273695426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46faa605631915b5%3A0xd4540d5132052da8!2zS3VyxaF1IGllbGEgMzIsIExpZXDEgWphLCBMVi0zNDAx!5e1!3m2!1sen!2slv!4v1756492869055!5m2!1sen!2slv" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <p>Parkings pieejamas pagalmā (ja ir vieta).</p>
+            </div>
+            <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHVydTJ2bHV3dG84cGFvdXN2bHFxaWdudGlraTI2cDl0YWQzYWUxdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/DA8op0omzFuwe14iyj/giphy.gif" alt="">
+        </div>
+        <div class="split">
+            <div>
+                <h2>Ko es varu sagaidīt no pasākuma?</h2>
+                <p>Telpās pieejamas 3 galvenās izklaides:
+                    <ul>
+                        <li>🎱 Bilijards</li>
+                        <li>♨️ Sauna</li>
+                        <li>🫧 Džakūzi</li>
+                    </ul>
+                </p>
+                <p>Atradīsi sevi jauku kompāniju un lielisku atmosfēru!</p>
+                <p>Iepazīsies ar jauniem cilvēkiem un socializēsies ar saviem draugiem!</p>
+                <h2>Kas jāņem līdzi?</h2>
+                <p>Ņem līdzi labu garastāvokli savādāk izmetīsim tevi ārā :D</p>
+                <p>Ja plāno iet saunā un džakūzī, tad ņem līdzi arī peldkostīmu un papildus piederumus!</p>
+                <p><b>DRESS KODS!!!!!!!!!👇</b></p>
+                <p>Tā lai mums patīk un tev būtu ērti 😁</p>
+            </div>
+            <div>
+                <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjl2OXBlOG1kNHBtNWE5dzVqN3hhdG11Z250YnZraGhjMDJtdmNjZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bi4RWAaw9XkuBkC0lO/giphy.gif" alt="">
+                <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnExenZkMWpkcTJzZ2s1bmhvcWlraW1idTk4MTFkbzQxdzIwenhmbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lRY3ucqJ1bT7HMr2Fa/giphy.gif" alt="">
+                <img src="https://media1.tenor.com/m/6tXb2R5kXhgAAAAC/ben-stiller-zoolander.gif" alt="">
+            </div>
+        </div>
+        <h2 style="text-align: center;">Vēlies piedalīties pasākuma mūzikas izvēlē?</h2>
+        <p>Spied <a href="https://forms.gle/hLFonyjaDuA5UcEv6" target="_blank">šeit</a>lai iesniegtu savu dziesmu! (var atkārtoti)</p>
+        <h1>
+            Gaidīsim tevi ar nepacietību! 🎉🎉🎉
+        </h1>
+        <p>Akward bildes :D</p>
+        <div class="splt">
+            <div>
+                <img src="./Images/akwardBilde1.jpg" alt="">
+                <img src="./Images/akwardBilde3.jpg" alt="">
+            </div>
+            <div>
+                <img src="./Images/akwardBilde2.jpg" alt="">
+                <img src="./Images/akwardBilde4.jpg" alt="">
+            </div>
+        </div>
+    </main>
+    <audio id="bg-music" loop>
+        <source src="bg_music.mp3" type="audio/mpeg">
+    </audio>
+    
+    <button id="confetti-btn">Confetti</button>
+    <button id="mute-btn" aria-label="Mute music">🔊</button>
+    <style>
+     #confetti-btn {
+        position: fixed !important;
+        bottom: 32px !important;
+        right: 32px !important;
+        z-index: 99999 !important;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: #ff477e;
+        color: #fff;
+        font-family: 'Karla', sans-serif;
+        font-size: 1em;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .js-confetti-canvas {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        pointer-events: none !important;
+        z-index: 99998 !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+    }
+    @media (max-width: 600px) {
+        #confetti-btn {
+          bottom: 16px !important;
+          right: 16px !important;
+          width: 48px;
+          height: 48px;
+          font-size: 0.9em;
+        }
+        .js-confetti-canvas {
+          width: 100vw !important;
+          height: 100vh !important;
+          max-width: 100vw !important;
+          max-height: 100vh !important;
+        }
+        #mute-btn {
+          bottom: 16px !important;
+          right: 96px !important;
+          width: 48px;
+          height: 48px;
+          font-size: 0.9em;
+        }
+      }
+    </style>
+</body>
+</html>
