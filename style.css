@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Karla|Slackey|Sriracha');
-@import "@fontsource/dancing-script";
+@import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 
 * {
@@ -264,7 +264,7 @@ body {
     }
 
     h1, h2, h3 {
-        font-family: 'Dancing Script', cursive;
+        font-family: 'charis-sil-regular';
         color: #333;
     }
 
