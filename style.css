@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Karla|Slackey|Sriracha');
+@import "@fontsource/dancing-script";
+
 
 * {
 	text-decoration: none;
@@ -262,7 +264,7 @@ body {
     }
 
     h1, h2, h3 {
-        font-family: 'Sriracha', cursive;
+        font-family: 'Dancing Script', cursive;
         color: #333;
     }
 
