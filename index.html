@@ -11,8 +11,20 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    
-    <main id="info-section">
+    <div class="invitation">
+        <div class="envelope">
+            <div class="flap"></div>
+            <div class="mask">
+                <div class="card">
+                    <img src="./Images/ploting_emoji.png" alt="kapec neradas?">
+                    <h1>Esi ielūgts!</h1>
+                    <p>Viljams un Samanta tevi ielūdz uz apvienoto Jubileju 🎉 <br> (mums paliek 20 gadi)</p>
+                    <a href="#" class="info-button">Vairāk informācijas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main id="info-section" style="display:none;">
         <h1>Informācija par pasākumu</h1>
         <p>Tie kas nezin, viljams un samanta diezgan bieži svin dzimšanas dienas kopā, tāpat kā jau iepriekš un šis gads nav nekāds izņēmums (šī būs trešā reize 😅).</p>
         <div class="split">
@@ -67,9 +79,12 @@
         </h1>
         
     </main>
-    
+    <audio id="bg-music" loop>
+        <source src="bg_music.mp3" type="audio/mpeg">
+    </audio>
     
     <button id="confetti-btn">Confetti</button>
+    <button id="mute-btn" aria-label="Mute music">🔊</button>
     <style>
      #confetti-btn {
         position: fixed !important;
