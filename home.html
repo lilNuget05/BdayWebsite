@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Funeral Details</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+  <div class="mobile-viewport">
+    <div class="home-container">
+
+      <!-- HEADER: Title & Dynamic Countdown Clock -->
+      <header class="home-header">
+        <h1 class="header-title">SAPULCĒŠANĀS SĀKAS:</h1>
+        
+        <div class="countdown-clock">
+          <div class="clock-unit">
+            <div class="unit-box" id="days">00</div>
+            <span class="unit-label">DAYS</span>
+          </div>
+          <div class="clock-unit">
+            <div class="unit-box" id="hours">00</div>
+            <span class="unit-label">HRS</span>
+          </div>
+          <div class="clock-unit">
+            <div class="unit-box" id="minutes">00</div>
+            <span class="unit-label">MIN</span>
+          </div>
+          <div class="clock-unit">
+            <div class="unit-box" id="seconds">00</div>
+            <span class="unit-label">SEC</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- SLIDE CONTAINER VIEWPORT -->
+      <main class="slides-viewport">
+        <div class="slides-wrapper" id="slides-wrapper">
+          
+          <!-- Slide 1: Invitation / Overview -->
+          <section class="slide-card active">
+            <h2 class="slide-title">Līdz nāve mūs šķirs</h2>
+            <div class="info-group">
+              <span class="info-label">Datums</span>
+              <p class="info-val">24. Oktobris</p>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Vieta</span>
+              <p class="info-val">Silķu iela 11-37 (vieta var mainīties)</p>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Dresskods</span>
+              <p class="info-val">Formālais melnais (ja nav formāls tad vienkārši melns)</p>
+            </div>
+            <img src="Images/coffin.png" class="reaction-media" alt="Reaction GIF" />
+          </section>
+
+          <!-- Slide 2: Event Details -->
+          <section class="slide-card">
+            <h2 class="slide-title">Aktivitātes</h2>
+            <div class="info-group">
+              <span class="info-label">Izklaides</span>
+              <p class="info-val">Pasākumā būs dažādas izklaides saistītas ar tematiku kurās varēs pat iegūt atdzīnības balvas</p>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Mājasdarbs</span>
+              <p class="info-val">Samanta izdomās</p>
+            </div>
+            
+          </section>
+
+          <!-- Slide 3: Reactions & Guestbook Wall -->
+          <section class="slide-card">
+            <h2 class="slide-title">VIESU GRĀMATA</h2>
+            
+            <!-- Username Input -->
+            <div class="user-bar">
+              <input type="text" id="username-input" class="app-input" placeholder="Your name / alias..." maxlength="20">
+            </div>
+
+            <!-- Message & GIF Picker Form -->
+            <div class="reaction-form">
+              <textarea id="reaction-text" class="app-input" rows="2" placeholder="Leave a message..."></textarea>
+              
+              <!-- Selected GIF Preview (hidden by default) -->
+              <div class="selected-gif-container hidden" id="selected-gif-container">
+                <img id="selected-gif-preview" src="" alt="Selected GIF">
+                <button type="button" class="btn-remove-gif" id="btn-remove-gif">&times;</button>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="btn-gif" id="btn-open-gif-picker">🎬 Add GIF</button>
+                <button type="button" class="btn-post" id="btn-submit-reaction">POST</button>
+              </div>
+            </div>
+
+            <!-- Reactions Feed Wall -->
+            <div class="reactions-feed" id="reactions-feed">
+              <div class="feed-loading">Fetching reactions...</div>
+            </div>
+          </section>
+
+          <!-- TENOR GIF PICKER MODAL -->
+          <div class="gif-picker-modal" id="gif-picker-modal">
+            <div class="gif-picker-content">
+              <div class="gif-picker-header">
+                <input type="text" id="gif-search-input" class="app-input" placeholder="Search Tenor GIFs...">
+                <button type="button" class="btn-close-gif" id="btn-close-gif">&times;</button>
+              </div>
+              <div class="gif-grid" id="gif-grid">
+                <div class="feed-loading">Type to search GIFs...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- FOOTER: Arrows Navigation & Reset Button -->
+      <footer class="home-footer">
+        <div class="slide-controls">
+          <button class="nav-arrow" id="btn-prev" aria-label="Previous slide">&#x276E;</button>
+          <div class="slide-dots" id="slide-dots"></div>
+          <button class="nav-arrow" id="btn-next" aria-label="Next slide">&#x276F;</button>
+        </div>
+
+        <button class="btn-replay" id="btn-replay">Atvērt durvis no jauna</button>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="home.js"></script>
+</body>
+</html>

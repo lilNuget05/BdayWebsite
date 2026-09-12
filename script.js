@@ -1,12 +1,23 @@
+// If the user already met the reaper, skip the door interaction and go straight to home.html
+if (localStorage.getItem('metReaper') === 'true') {
+  window.location.href = 'home.html';
+}
+
 // DOM Elements
 const doorContainer = document.getElementById('door-container');
 const handle = document.getElementById('img-handle');
+const lock = document.getElementById('img-lock');
+const key = document.getElementById('img-key');
 const peephole = document.getElementById('img-peephole');
 const fadeOverlay = document.getElementById('fade-overlay');
 const peepholeModal = document.getElementById('peephole-modal');
 const startScreen = document.getElementById('start-screen');
+const reaperContainer = document.getElementById('reaper-container');
+const newspaperModal = document.getElementById('newspaper-modal');
+const btnProceed = document.getElementById('btn-proceed');
 
 let isDoorOpen = false;
+let isUnlocked = false;
 let knockInterval = null;
 
 // Audio Context Setup
@@ -22,22 +33,17 @@ function getAudioContext() {
 }
 
 /* ==========================================================================
-   AUDIO PLACEHOLDERS
+   AUDIO HANDLERS
    ========================================================================== */
 function playKnockSound() {
   try {
-    const knockAudio = new Audio('Sounds/knock.mp3');
-    knockAudio.volume = 0.8; // Adjust volume between 0.0 and 1.0 if needed
-    knockAudio.play().catch((err) => {
-      console.log("Audio playback waiting for interaction: ", err);
-    });
-  } catch (e) {
-    console.error(e);
-  }
+    const audio = new Audio('Sounds/knock.mp3');
+    audio.volume = 0.8;
+    audio.play().catch(() => {});
+  } catch (e) {}
 }
 
 function startKnockingLoop() {
-  // First knock plays instantly when starting
   playKnockSound();
   knockInterval = setInterval(() => {
     if (!isDoorOpen) {
@@ -57,49 +63,123 @@ function stopKnockingLoop() {
 
 function playHandleSound() {
   try {
-    const hanldeAudio = new Audio('Sounds/handle.mp3');
-     hanldeAudio.volume = 0.8; // Adjust volume between 0.0 and 1.0 if needed
-     hanldeAudio.play().catch((err) => {
-      console.log("Audio playback waiting for interaction: ", err);
-    });
+    const audio = new Audio('Sounds/handle.mp3');
+    audio.volume = 0.8;
+    audio.play().catch(() => {});
+  } catch (e) {}
+}
+
+function playUnlockSound() {
+  try {
+    const audio = new Audio('Sounds/unlock.mp3');
+    audio.volume = 0.8;
+    audio.play().catch(() => {});
   } catch (e) {}
 }
 
 function playDoorOpenSound() {
   try {
-    const doorAudio = new Audio('Sounds/door.m4a');
-     doorAudio.volume = 0.8; 
-     doorAudio.play().catch((err) => {
-      console.log("Audio playback waiting for interaction: ", err);
-    });
+    const audio = new Audio('Sounds/door.m4a');
+    audio.volume = 0.8;
+    audio.play().catch(() => {});
   } catch (e) {}
 }
 
 /* ==========================================================================
-   START SCREEN & AUDIO INITIALIZATION
+   KEY DRAG & DROP LOGIC (Touch + Mouse Support)
    ========================================================================== */
+let isDragging = false;
+let startX = 0, startY = 0;
+let initialLeft = 0, initialTop = 0;
+
+function onDragStart(e) {
+  if (isUnlocked) return;
+  isDragging = true;
+  
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  
+  startX = clientX;
+  startY = clientY;
+  
+  initialLeft = key.offsetLeft;
+  initialTop = key.offsetTop;
+}
+
+function onDragMove(e) {
+  if (!isDragging) return;
+  e.preventDefault();
+
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+  const deltaX = clientX - startX;
+  const deltaY = clientY - startY;
+
+  key.style.left = `${initialLeft + deltaX}px`;
+  key.style.top = `${initialTop + deltaY}px`;
+
+  // Check collision with lock during drag
+  if (checkCollision(key, lock)) {
+    unlockDoor();
+  }
+}
+
+function onDragEnd() {
+  isDragging = false;
+}
+
+function checkCollision(elem1, elem2) {
+  const r1 = elem1.getBoundingClientRect();
+  const r2 = elem2.getBoundingClientRect();
+
+  return !(
+    r1.right < r2.left ||
+    r1.left > r2.right ||
+    r1.bottom < r2.top ||
+    r1.top > r2.bottom
+  );
+}
+
+function unlockDoor() {
+  isUnlocked = true;
+  isDragging = false;
+
+  playUnlockSound();
+
+  // Hide key and visually mark lock as unlocked
+  key.classList.add('hidden');
+  lock.classList.add('unlocked');
+}
+
+// Attach Drag Listeners
+key.addEventListener('mousedown', onDragStart);
+document.addEventListener('mousemove', onDragMove);
+document.addEventListener('mouseup', onDragEnd);
+
+key.addEventListener('touchstart', onDragStart, { passive: false });
+document.addEventListener('touchmove', onDragMove, { passive: false });
+document.addEventListener('touchend', onDragEnd);
+
+/* ==========================================================================
+   INTERACTION LOGIC
+   ========================================================================== */
+
+// 1. Unlock Audio on initial screen tap
 startScreen.addEventListener('click', () => {
-  // 1. Resume Audio Context immediately on tap
   getAudioContext();
-
-  // 2. Hide the Start Screen with smooth fade
   startScreen.classList.add('hidden');
-
-  // 3. Start the knocking loop
   if (!isDoorOpen && !knockInterval) {
     startKnockingLoop();
   }
 });
 
-/* ==========================================================================
-   PEEPHOLE & DOOR EVENTS
-   ========================================================================== */
+// 2. Peephole View
 peephole.addEventListener('click', (e) => {
   e.stopPropagation();
   if (isDoorOpen) return;
 
   fadeOverlay.classList.add('active');
-
   setTimeout(() => {
     peepholeModal.classList.add('visible');
     setTimeout(() => {
@@ -110,7 +190,6 @@ peephole.addEventListener('click', (e) => {
 
 peepholeModal.addEventListener('click', () => {
   fadeOverlay.classList.add('active');
-
   setTimeout(() => {
     peepholeModal.classList.remove('visible');
     setTimeout(() => {
@@ -119,19 +198,44 @@ peepholeModal.addEventListener('click', () => {
   }, 400);
 });
 
+// 3. Open Door via Handle (Locked / Unlocked check)
 handle.addEventListener('click', (e) => {
   e.stopPropagation();
 
-  if (!isDoorOpen) {
-    isDoorOpen = true;
-    stopKnockingLoop();
+  if (isDoorOpen) return;
 
+  if (!isUnlocked) {
+    // Play handle click/jammed sound and trigger shake animation
     playHandleSound();
-    handle.classList.add('turned');
-
-    setTimeout(() => {
-      playDoorOpenSound();
-      doorContainer.classList.add('open');
-    }, 300);
+    handle.classList.remove('locked-shake');
+    void handle.offsetWidth; // Trigger reflow for animation restart
+    handle.classList.add('locked-shake');
+    return;
   }
+
+  // If unlocked, open door
+  isDoorOpen = true;
+  stopKnockingLoop();
+
+  playHandleSound();
+  handle.classList.add('turned');
+
+  setTimeout(() => {
+    playDoorOpenSound();
+    doorContainer.classList.add('open');
+  }, 300);
+});
+
+// 4. Click Reaper / Newspaper to view full newspaper modal
+reaperContainer.addEventListener('click', () => {
+  if (isDoorOpen) {
+    newspaperModal.classList.add('visible');
+  }
+});
+
+// 5. Proceed button action
+btnProceed.addEventListener('click', (e) => {
+  e.stopPropagation();
+  localStorage.setItem('metReaper', 'true');
+  window.location.href = 'home.html';
 });

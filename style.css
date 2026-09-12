@@ -105,6 +105,27 @@ body {
   -webkit-backface-visibility: visible;
 }
 
+/* --- layer lock --- */
+
+.layer-lock {
+  position: absolute;
+  z-index: 6;
+  top: 58%;
+  left: 84%;
+  width: 8%; 
+  aspect-ratio: 1 / 1;
+  transform: translateX(-50%);
+  cursor: pointer;
+  
+  /* PIVOT POINT: Pivot from the left mechanism base */
+  transform-origin: 15% 50%; 
+  transition: transform 0.3s ease-in-out;
+
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+}
+
+
 /* --- LAYER 5: HANDLE --- */
 .layer-handle {
   position: absolute;
@@ -247,4 +268,120 @@ body {
   color: #777;
   text-transform: uppercase;
   animation: pulse 2s infinite;
+}
+
+/* --- LAYER 9: NEWSPAPER MODAL & PROCEED BUTTON --- */
+.newspaper-modal {
+  position: absolute;
+  inset: 0;
+  z-index: 100; /* Increased z-index */
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  padding: 20px;
+
+  /* FIX: Force modal out in front of the 3D rotated door panel */
+  transform: translateZ(200px); 
+}
+
+.newspaper-modal.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.newspaper-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-height: 90%;
+  transform: scale(0.8);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.newspaper-modal.visible .newspaper-content {
+  transform: scale(1);
+}
+
+.newspaper-img {
+  width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+}
+
+.btn-proceed {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #a32222;
+  color: #ffffff;
+  border: 1px solid #ff4d4d;
+  font-family: Georgia, serif;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(163, 34, 34, 0.5);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-proceed:active {
+  transform: scale(0.95);
+  background-color: #7a1818;
+}
+
+/* Make Reaper/Newspaper interactive once door is open */
+.reaper-container {
+  cursor: pointer;
+}
+
+/* Add key positioning and styling */
+.layer-key {
+  position: absolute;
+  z-index: 25;
+  bottom: 8%;
+  left: 12%;
+  width: 14%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  cursor: grab;
+  touch-action: none; /* Prevents mobile page scrolling while dragging */
+  transition: transform 0.2s ease, opacity 0.3s ease;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.7));
+}
+
+.layer-key:active {
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+
+.layer-key.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Shake animation for handle when locked */
+.layer-handle.locked-shake {
+  animation: handleShake 0.3s ease-in-out;
+}
+
+@keyframes handleShake {
+  0%, 100% { transform: translateX(-50%) rotate(0deg); }
+  20% { transform: translateX(-50%) rotate(-8deg); }
+  40% { transform: translateX(-50%) rotate(8deg); }
+  60% { transform: translateX(-50%) rotate(-4deg); }
+  80% { transform: translateX(-50%) rotate(4deg); }
+}
+
+/* Optional glow effect when lock is unlocked */
+.layer-lock.unlocked {
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
 }

@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>??????????</title>
+  <title>Funeral Invitation</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="mobile-viewport">
-    <!-- 1. Background Scene -->
-    <!-- <img src="Images/Scene.png" alt="Outside Scene" class="layer-scene" id="img-scene"> -->
+    <!-- 1. Background Scene / Reaper Layer -->
+    <div class="reaper-container" id="reaper-container">
+      <img src="Images/reaper.png" alt="Reaper" class="layer-reaper" id="img-reaper">
+    </div>
 
     <!-- 2. Door Frame -->
     <img src="Images/frame.png" alt="Door Frame" class="layer-frame" id="img-frame">
@@ -20,7 +22,11 @@
       <img src="Images/doot.png" alt="Door Panel" class="layer-door" id="img-door">
       <img src="Images/peephole.png" alt="Peephole" class="layer-peephole" id="img-peephole">
       <img src="Images/doorHandle.png" alt="Handle" class="layer-handle" id="img-handle">
+      <img src="Images/lock.png" alt="lock" class="layer-lock" id="img-lock">
     </div>
+
+    <!-- 3.5 Draggable Key -->
+    <img src="Images/key.png" alt="Key" class="layer-key" id="img-key">
 
     <!-- 4. Black Fade Transition Layer -->
     <div class="fade-overlay" id="fade-overlay"></div>
@@ -34,7 +40,15 @@
       <div class="peephole-hint">Click to step back</div>
     </div>
 
-    <!-- 6. START SCREEN (Unlocks Audio Autoplay) -->
+    <!-- 6. NEWSPAPER MODAL -->
+    <div class="newspaper-modal" id="newspaper-modal">
+      <div class="newspaper-content">
+        <img src="Images/newspaper.png" alt="The Daily Dirge Newspaper" class="newspaper-img">
+        <button class="btn-proceed" id="btn-proceed">Turpināt</button>
+      </div>
+    </div>
+
+    <!-- 7. START SCREEN (Unlocks Audio Autoplay) -->
     <div class="start-screen" id="start-screen">
       <div class="start-prompt">
         <p class="start-title">Kāds ir pie durvīm</p>
