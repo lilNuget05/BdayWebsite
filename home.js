@@ -134,13 +134,15 @@ if (btnReplay) {
 document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
   initSlideDeck();
-  initReactions(); // Make sure this is called!
+  initReactions();
+  initRoadmap();
+  initMusic();
 });
 
 /* ==========================================================================
    4. GOOGLE SHEETS REACTION WALL & GIPHY GIF INTEGRATION
    ========================================================================== */
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzA84F2evD3NEbJYjZNq7v-IzfRqiKZ3OXD_snOTJ5uEh8nr4iGT5x6QJaTGqFLkDVtWw/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw9cf65yD4cqJA5IpDEaSemhWRa-FuZMq8ZyNn18MYdSyG-784ljfOfUwtAmk16KbGOZw/exec';
 
 // Replace this string with your GIPHY API key from developers.giphy.com
 const GIPHY_API_KEY = 'ShEc4loQ7vSUrtkwAnKcNU7o2q6Re9ql'; 
@@ -348,3 +350,89 @@ function initReactions() {
 
 }
 
+function initRoadmap() {
+  const form = document.getElementById('roadmap-form');
+  const btnSubmit = document.getElementById('btn-submit-roadmap');
+  const successMsg = document.getElementById('roadmap-success-msg');
+
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = 'SŪTA...';
+
+    const payload = {
+      action: "roadmap",
+      guestName: document.getElementById('rm-guest-name').value.trim() || 'Anonīms',
+      
+      // Vila prognozes
+      vilDeathAge: document.getElementById('rm-vil-death-age').value.trim(),
+      vilDeathCause: document.getElementById('rm-vil-death-cause').value.trim(),
+      vilFirstChild: document.getElementById('rm-vil-first-child').value.trim(),
+      vilPension: document.getElementById('rm-vil-pension').value.trim(),
+      vilMidlife: document.getElementById('rm-vil-midlife').value.trim(),
+      vilMarriages: document.getElementById('rm-vil-marriages').value.trim(),
+      vilDiapers: document.getElementById('rm-vil-diapers').value.trim(),
+
+      // Samantas prognozes
+      samDeathAge: document.getElementById('rm-sam-death-age').value.trim(),
+      samDeathCause: document.getElementById('rm-sam-death-cause').value.trim(),
+      samFirstChild: document.getElementById('rm-sam-first-child').value.trim(),
+      samPension: document.getElementById('rm-sam-pension').value.trim(),
+      samMidlife: document.getElementById('rm-sam-midlife').value.trim(),
+      samMarriages: document.getElementById('rm-sam-marriages').value.trim(),
+      samDiapers: document.getElementById('rm-sam-diapers').value.trim()
+    };
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      // Parāda "paldies" ziņu un paslēpj pogu
+      btnSubmit.classList.add('hidden');
+      if (successMsg) successMsg.classList.remove('hidden');
+
+    } catch (err) {
+      alert('Neizdevās nosūtīt prognozi.');
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = 'NOSŪTĪT PROGNOZI';
+    }
+  });
+}
+
+let bgAudio = null;
+function initMusic() {
+  try {
+    if (!bgAudio) {
+      bgAudio = new Audio('Sounds/mus.mp3');
+      bgAudio.volume = 0.4;
+      bgAudio.loop = true;
+    }
+
+    // Attempt immediately (works if browser allows or after interaction)
+    const playPromise = bgAudio.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay blocked: wait for the user's first click/touch anywhere
+        const enableAudioOnInteraction = () => {
+          if (bgAudio && bgAudio.paused) {
+            bgAudio.play().catch(() => {});
+          }
+          // Remove listeners once audio successfully starts
+          document.removeEventListener('click', enableAudioOnInteraction);
+          document.removeEventListener('touchstart', enableAudioOnInteraction);
+        };
+
+        document.addEventListener('click', enableAudioOnInteraction);
+        document.addEventListener('touchstart', enableAudioOnInteraction);
+      });
+    }
+  } catch (e) {}
+}

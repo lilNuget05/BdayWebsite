@@ -103,6 +103,101 @@
             </div>
           </section>
 
+          
+
+            <!-- Saglabāto rezultātu saraksts -->
+            <div class="roadmap-feed" id="roadmap-feed">
+              <div class="feed-loading">Ielādē prognozes...</div>
+            </div>
+          </section>
+
+          <!-- Slide: DZĪVES CEĻA PROGNOZE -->
+          <section class="slide-card">
+            <h2 class="slide-title">DZĪVES CEĻA PROGNOZE</h2>
+            <p class="slide-text">Aizpildi prognozi par gaviļnieku nākotni (atklāsim ballītē):</p>
+
+            <form id="roadmap-form" class="roadmap-form">
+              
+              <!-- Viesu vārds -->
+              <div class="roadmap-field">
+                <label class="info-label" for="rm-guest-name">Tavs vārds:</label>
+                <input type="text" id="rm-guest-name" class="app-input" placeholder="Tavs vārds..." required>
+              </div>
+
+              <!-- Antrete tabulai: Vil / Sam -->
+              <div class="roadmap-header-row">
+                <span class="person-tag">VILJAMS</span>
+                <span class="person-tag">SAMANTA</span>
+              </div>
+
+              <!-- 1. Cik gados atstieps kājas? -->
+              <div class="roadmap-question-block">
+                <label class="question-title">Cik gados atstieps kājas?</label>
+                <div class="inputs-row">
+                  <input type="text" id="rm-vil-death-age" class="app-input" placeholder="Viljams...">
+                  <input type="text" id="rm-sam-death-age" class="app-input" placeholder="Samanta...">
+                </div>
+              </div>
+
+              <!-- 2. Nāves iemesls? -->
+              <div class="roadmap-question-block">
+                <label class="question-title">Nāves iemesls?</label>
+                <div class="inputs-row">
+                  <input type="text" id="rm-vil-death-cause" class="app-input" placeholder="Viljams...">
+                  <input type="text" id="rm-sam-death-cause" class="app-input" placeholder="Samanta...">
+                </div>
+              </div>
+
+              <!-- 3. Pirmais bērns piedzims cik gados? -->
+              <div class="roadmap-question-block">
+                <label class="question-title">Pirmais bērns piedzims cik gados?</label>
+                <div class="inputs-row">
+                  <input type="text" id="rm-vil-first-child" class="app-input" placeholder="Viljams...">
+                  <input type="text" id="rm-sam-first-child" class="app-input" placeholder="Samanta...">
+                </div>
+              </div>
+
+              <!-- 4. Cik liela pensija būs? -->
+              <div class="roadmap-question-block">
+                <label class="question-title">Cik liela pensija būs?</label>
+                <div class="inputs-row">
+                  <input type="text" id="rm-vil-pension" class="app-input" placeholder="Viljams...">
+                  <input type="text" id="rm-sam-pension" class="app-input" placeholder="Samanta...">
+                </div>
+              </div>
+
+              <!-- 5. Cik gados parādīsies pusmūža krīze? -->
+              <div class="roadmap-question-block">
+                <label class="question-title">Cik gados parādīsies pusmūža krīze?</label>
+                <div class="inputs-row">
+                  <input type="text" id="rm-vil-midlife" class="app-input" placeholder="Viljams...">
+                  <input type="text" id="rm-sam-midlife" class="app-input" placeholder="Samanta...">
+                </div>
+              </div>
+
+              <!-- 6. Cik neizdevušās laulības? -->
+              <div class="roadmap-question-block">
+                <label class="question-title">Cik neizdevušās laulības?</label>
+                <div class="inputs-row">
+                  <input type="text" id="rm-vil-marriages" class="app-input" placeholder="Viljams...">
+                  <input type="text" id="rm-sam-marriages" class="app-input" placeholder="Samanta...">
+                </div>
+              </div>
+
+              <!-- 7. Cik gados sāks nēsāt pieaugušo pampersus? -->
+              <div class="roadmap-question-block">
+                <label class="question-title">Cik gados sāks nēsāt pampersus?</label>
+                <div class="inputs-row">
+                  <input type="text" id="rm-vil-diapers" class="app-input" placeholder="Viljams...">
+                  <input type="text" id="rm-sam-diapers" class="app-input" placeholder="Samanta...">
+                </div>
+              </div>
+
+              <button type="submit" id="btn-submit-roadmap" class="btn-rsvp">NOSŪTĪT PROGNOZI</button>
+              <div id="roadmap-success-msg" class="success-msg hidden">Paldies! Tava prognoze ir saglabāta ☠️</div>
+            </form>
+          </section>
+
           <!-- TENOR GIF PICKER MODAL -->
           <div class="gif-picker-modal" id="gif-picker-modal">
             <div class="gif-picker-content">
