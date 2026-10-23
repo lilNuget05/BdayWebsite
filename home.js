@@ -3,11 +3,11 @@
    ========================================================================== */
 function initCountdown() {
   const currentYear = new Date().getFullYear();
-  let targetDate = new Date(`October 24, ${currentYear} 00:00:00`).getTime();
+  let targetDate = new Date(`October 24, ${currentYear} 18:00:00`).getTime();
   
   // If October 24th has passed this year, point to next year's October 24th
   if (new Date().getTime() > targetDate) {
-    targetDate = new Date(`October 24, ${currentYear + 1} 00:00:00`).getTime();
+    targetDate = new Date(`October 24, ${currentYear + 1} 18:00:00`).getTime();
   }
 
   const elDays = document.getElementById('days');
